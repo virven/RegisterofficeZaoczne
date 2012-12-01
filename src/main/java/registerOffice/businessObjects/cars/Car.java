@@ -1,11 +1,26 @@
 package registerOffice.businessObjects.cars;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
+
 import registerOffice.Context;
 import registerOffice.businessObjects.persons.Person;
 
+@Entity
 public abstract class Car implements CarInterface{
 
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	
+	@ManyToOne
 	protected Person owner;
+	
+	@Transient
 	Context context;
 	public Car(){
 		context =Context.getInstance();
@@ -26,6 +41,15 @@ public abstract class Car implements CarInterface{
 	{
 		this.owner=owner;
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	protected void finalize() throws Throwable {
 		context.reduceCars();

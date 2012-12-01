@@ -3,15 +3,54 @@ package registerOffice.businessObjects.persons;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 import registerOffice.Context;
 import registerOffice.businessObjects.cars.*;
 
+
+@Entity
+@Table(name = "Osoby")
+@NamedQueries({
+	@NamedQuery(
+			name="Person.all",
+			query="from Person p"
+			),
+	@NamedQuery(
+			name="Person.id",
+			query="from Person p where id= :id"
+			),
+	@NamedQuery(
+			name="Person.delete",
+			query="Delete from Person p where id=:id"
+			)
+})
 public class Person {
 
+	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name="Imie")
 	private String name;
+	
+	@OneToMany(mappedBy="owner", cascade = CascadeType.PERSIST)
 	private List<Car> cars;
+	
 	private String pesel;
 	private String address;
+	
+	@Transient
 	Context context;
 	
 	public Person(String name, String pesel, String address)
@@ -58,6 +97,13 @@ public class Person {
 
 	public void setPesel(String pesel) {
 		this.pesel = pesel;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Override

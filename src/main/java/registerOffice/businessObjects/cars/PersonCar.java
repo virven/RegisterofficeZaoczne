@@ -1,10 +1,16 @@
 package registerOffice.businessObjects.cars;
 
+import javax.persistence.Entity;
+
+
+@Entity
 public class PersonCar extends Car{
 
 	//pole statyczne
 	
 	//pola prywatne
+	
+	
 	
 	private String mark;
 	private String registerNumber;
