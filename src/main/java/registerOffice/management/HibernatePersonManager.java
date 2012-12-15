@@ -22,8 +22,15 @@ public class HibernatePersonManager
 		List<Person> result = 
 				session.getNamedQuery("Person.id")
 					.setInteger("id", id).list();
+		if(result.size()==0)
+			return null;
 		
-		return result.get(0);
+		Person returnValue = new Person(
+				result.get(0).getName(), 
+				result.get(0).getPesel(),
+				result.get(0).getAddress());
+		returnValue.setId(result.get(0).getId());
+		return returnValue;
 	}
 
 	@Override
