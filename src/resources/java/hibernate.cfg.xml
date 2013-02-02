@@ -24,8 +24,11 @@
    
     <property name="hbm2ddl.auto">create</property>
     
-    <mapping class="registerOffice.businessObjects.persons.Person" />
-    <mapping class="registerOffice.businessObjects.cars.PersonCar"/>
+    <mapping class="registerOffice.businessObjects.persons.Skater" />
+    <mapping class="registerOffice.businessObjects.lyzwy.PersonLyzwy"/>
+    <mapping class="registerOffice.businessObjects.lyzwy.FiguroweLyzwy"/>
+    <mapping class="registerOffice.businessObjects.lyzwy.HokejoweLyzwy"/>
+    <mapping class="registerOffice.businessObjects.lyzwy.Lyzwy"/>
     
     </session-factory>
 </hibernate-configuration>

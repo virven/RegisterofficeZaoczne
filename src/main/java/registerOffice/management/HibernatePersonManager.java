@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import registerOffice.businessObjects.persons.Person;
+import registerOffice.businessObjects.persons.Skater;
 
 public class HibernatePersonManager 
-	implements ManagerInterface<Person>{
+	implements ManagerInterface<Skater>{
 
 	Session session;
 	
@@ -17,32 +17,32 @@ public class HibernatePersonManager
 	}
 	
 	@Override
-	public Person get(int id) {
+	public Skater get(int id) {
 		
-		List<Person> result = 
-				session.getNamedQuery("Person.id")
+		List<Skater> result = 
+				session.getNamedQuery("Skater.id")
 					.setInteger("id", id).list();
 		if(result.size()==0)
 			return null;
 		
-		Person returnValue = new Person(
+		Skater returnValue = new Skater(
 				result.get(0).getName(), 
-				result.get(0).getPesel(),
+				result.get(0).getNumer_buta(),
 				result.get(0).getAddress());
 		returnValue.setId(result.get(0).getId());
 		return returnValue;
 	}
 
 	@Override
-	public List<Person> getAll() {
-		List<Person> result =
-				session.getNamedQuery("Person.all")
+	public List<Skater> getAll() {
+		List<Skater> result =
+				session.getNamedQuery("Skater.all")
 				.list();
 		return result;
 	}
 
 	@Override
-	public boolean save(Person obj) {
+	public boolean save(Skater obj) {
 		
 		try{
 			session.beginTransaction();
@@ -55,12 +55,12 @@ public class HibernatePersonManager
 	}
 
 	@Override
-	public boolean delete(Person obj) {
+	public boolean delete(Skater obj) {
 		
 		try
 		{
 			session.beginTransaction();
-			session.getNamedQuery("Person.delete")
+			session.getNamedQuery("Skater.delete")
 			.setInteger("id", obj.getId())
 			.executeUpdate();
 			

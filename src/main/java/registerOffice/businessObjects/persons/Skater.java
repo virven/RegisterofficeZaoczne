@@ -16,26 +16,26 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 import registerOffice.Context;
-import registerOffice.businessObjects.cars.*;
+import registerOffice.businessObjects.lyzwy.*;
 
 
 @Entity
-@Table(name = "Osoby")
+@Table(name = "Skaters")
 @NamedQueries({
 	@NamedQuery(
-			name="Person.all",
-			query="from Person p"
+			name="Skater.all",
+			query="from Skater p"
 			),
 	@NamedQuery(
-			name="Person.id",
-			query="from Person p where id= :id"
+			name="Skater.id",
+			query="from Skater p where id= :id"
 			),
 	@NamedQuery(
-			name="Person.delete",
-			query="Delete from Person p where id=:id"
+			name="Skater.delete",
+			query="Delete from Skater p where id=:id"
 			)
 })
-public class Person {
+public class Skater {
 
 	@Id
 	@GeneratedValue
@@ -45,34 +45,34 @@ public class Person {
 	private String name;
 	
 	@OneToMany(mappedBy="owner", cascade = CascadeType.PERSIST)
-	private List<Car> cars;
+	private List<Lyzwy> lyzwy;
 	
-	private String pesel;
-	private String address;
+	private String numer_buta;
+	private String addres;
 	
 	@Transient
 	Context context;
 	
-	public Person(String name, String pesel, String address)
+	public Skater(String name, String numer_buta, String addres)
 	{
-		this(name,pesel);
-		this.address=address;
+		this(name,numer_buta);
+		this.addres=addres;
 	}
-	public Person(String name, String pesel)
+	public Skater(String name, String numer_buta)
 	{
 		context= Context.getInstance();
 		context.raisenumberOfPeople();
-		this.pesel=pesel;
+		this.numer_buta=numer_buta;
 		this.name=name;
-		this.cars=new ArrayList<Car>();
+		this.lyzwy=new ArrayList<Lyzwy>();
 	}
 	
-	public Person(String name) {
+	public Skater(String name) {
 		
 		this(name,"");
 	}
 	
-	public Person()
+	public Skater()
 	{
 		
 		this("","");
@@ -84,19 +84,19 @@ public class Person {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Car> getCars() {
-		return cars;
+	public List<Lyzwy> getLyzwy() {
+		return lyzwy;
 	}
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
-	}
-
-	public String getPesel() {
-		return pesel;
+	public void setCars(List<Lyzwy> lyzwy) {
+		this.lyzwy = lyzwy;
 	}
 
-	public void setPesel(String pesel) {
-		this.pesel = pesel;
+	public String getNumer_buta() {
+		return numer_buta;
+	}
+
+	public void setPesel(String numer_buta) {
+		this.numer_buta = numer_buta;
 	}
 	
 	public int getId() {
@@ -108,16 +108,16 @@ public class Person {
 	
 	@Override
 	protected void finalize() throws Throwable {
-		context.reducePeople();
+		context.RedukujPeople();
 		super.finalize();
 	}
 
 	public String getAddress() {
-		return address;
+		return addres;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(String adres) {
+		this.addres = adres;
 	}
 
 	

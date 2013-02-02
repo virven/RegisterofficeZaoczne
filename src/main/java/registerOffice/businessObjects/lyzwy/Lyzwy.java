@@ -1,4 +1,4 @@
-package registerOffice.businessObjects.cars;
+package registerOffice.businessObjects.lyzwy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +7,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import registerOffice.Context;
-import registerOffice.businessObjects.persons.Person;
+import registerOffice.businessObjects.persons.Skater;
 
 @Entity
-public abstract class Car implements CarInterface{
+public abstract class Lyzwy implements LyzwyInterface{
 
 	@Id
 	@GeneratedValue
@@ -18,26 +18,26 @@ public abstract class Car implements CarInterface{
 	
 	
 	@ManyToOne
-	protected Person owner;
+	protected Skater owner;
 	
 	@Transient
 	Context context;
-	public Car(){
+	public Lyzwy(){
 		context =Context.getInstance();
-		context.raiseNumberOfCars();
+		context.raiseNumberOfLyzwy();
 	}
 	
 	public void printData()
 	{
 		System.out.println("Owner: "+owner.getName());
-		System.out.println(getCarDetails());
+		System.out.println(getLyzwyDetails());
 	}
 	
-	public abstract String getCarDetails();
+	public abstract String getLyzwyDetails();
 	
-	public abstract Car Clone();
+	public abstract Lyzwy Clone();
 	
-	public void setOwner(Person owner)
+	public void setOwner(Skater owner)
 	{
 		this.owner=owner;
 	}
@@ -52,7 +52,7 @@ public abstract class Car implements CarInterface{
 
 	@Override
 	protected void finalize() throws Throwable {
-		context.reduceCars();
+		context.RedukujLyzwy();
 		super.finalize();
 	}
 	

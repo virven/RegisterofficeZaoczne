@@ -1,8 +1,8 @@
 package registerOffice.management.conditions;
 
-import registerOffice.businessObjects.persons.Person;
+import registerOffice.businessObjects.persons.Skater;
 
-public class GetByPeselCondition extends Condition<Person>{
+public class GetByPeselCondition extends Condition<Skater>{
 
 	private String pesel;
 	
@@ -12,9 +12,9 @@ public class GetByPeselCondition extends Condition<Person>{
 	}
 	
 	@Override
-	protected boolean check(Person obj) {
+	protected boolean check(Skater obj) {
 		
-		return obj.getPesel().equalsIgnoreCase(pesel);
+		return obj.getNumer_buta().equalsIgnoreCase(pesel);
 	}
 
 }
